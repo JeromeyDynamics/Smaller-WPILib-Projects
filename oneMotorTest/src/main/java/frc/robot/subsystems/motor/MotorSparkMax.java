@@ -1,5 +1,6 @@
 package frc.robot.subsystems.motor;
 
+import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 
 public class MotorSparkMax implements MotorIO{
@@ -12,6 +13,11 @@ public class MotorSparkMax implements MotorIO{
     @Override
     public void setMotorSpeed(double speed) {
         motor.set(speed);
+    }
+
+    @Override
+    public void stop() {
+        motor.set(0);
     }
     
 }

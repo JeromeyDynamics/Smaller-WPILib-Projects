@@ -19,4 +19,9 @@ public class Motor extends SubsystemBase {
         return run(
             () -> motorIO.setMotorSpeed(MotorConstants.kCounterclockwiseMotorSpeed));
     }
+
+    public Command stopMotor() {
+        return run(
+            () -> motorIO.stop());
+    }
 }
