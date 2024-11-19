@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.subsystems.vision.Vision;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -17,7 +18,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
 
-  // Replace with CommandPS4Controller or CommandJoystick if needed
+  private final Vision vision = new Vision();
+
   private final CommandXboxController controller =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
@@ -30,13 +32,9 @@ public class RobotContainer {
     
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  public Command getAutonomousCommand() {
-    // Add your autonomous commands here
-    return null; // Replace with your autonomous command
+  public void periodic() {
+    vision.getLatestResult();
+    vision.getLatestTargets();
+    vision.periodic();
   }
 }
