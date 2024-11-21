@@ -1,20 +1,27 @@
 package frc.robot.subsystems.vision;
 
-+import frc.robot.subsystems.vision.PhotonCamera;
-+import frc.robot.subsystems.vision.PhotonPipelineResult;
-+import frc.robot.subsystems.vision.PhotonTrackedTarget;
+import frc.robot.subsystems.vision.PhotonCamera;
+import frc.robot.subsystems.vision.PhotonPipelineResult;
+import frc.robot.subsystems.vision.PhotonTrackedTarget;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.vision.VisionConstants;
-+import edu.wpi.cscore.UsbCamera;
-+import edu.wpi.first.cameraserver.CameraServer;
-+import edu.wpi.first.networktables.NetworkTableInstance;
+import java.util.List;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Vision extends SubsystemBase {
     private final PhotonCamera camera;
     private PhotonPipelineResult currentResult;
     private List<PhotonTrackedTarget> currentTargets;
     private PhotonTrackedTarget currentBestTarget;
+    public Pose2d[] estimate = new Pose2d[0];
+    public double timestamp = 0;
+    public double[] timestampArray = new double[0];
+    public boolean hasEstimate = false;
+    public byte[] results;
     
     public Vision() {
         camera = new PhotonCamera("7587_Camera");
